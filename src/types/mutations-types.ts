@@ -1,7 +1,6 @@
 export interface LoginMutation {
   email: string
   password: string
-
 }
 
 export interface RegisterMutation {

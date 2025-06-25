@@ -2,6 +2,7 @@ import { useMutation, UseMutationOptions } from '@tanstack/react-query'
 import { Login, Register, Logout, CreateAccount } from '@/services/mutations'
 import { useRouter } from 'next/navigation'
 import { RegisterMutation, LoginMutation, createAccount } from '@/types/mutations-types'
+import { toast } from 'sonner'
 
 export function useLogin(
   options?: UseMutationOptions<any, Error, LoginMutation>
@@ -37,10 +38,19 @@ export const useCreateAccount = (
   options?: UseMutationOptions<any, Error, createAccount>
 ) => {
   const router = useRouter()
+
   return useMutation({
     mutationKey: ['createAccount'],
     mutationFn: (payload: createAccount) => CreateAccount(payload),
-
+    onSuccess: (data) => {
+      toast.success('Conta configurada com sucesso!')
+      router.push('/')
+      options?.onSuccess?.(data, {} as any, undefined)
+    },
+    onError: (error) => {
+      toast.error('Erro ao configurar conta')
+      options?.onError?.(error, {} as any, undefined)
+    },
     retry: 0,
     ...options
   })
