@@ -73,7 +73,7 @@ export function DashboardOverview() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
         <div>
           <h1 className="text-3xl font-bold">
-            {t('welcome', { name: 'Jean VIADO' })}
+            {t('welcome', { name: 'Neymar' })}
           </h1>
           <p className="text-muted-foreground">{t('welcomeSubtitle')}</p>
         </div>

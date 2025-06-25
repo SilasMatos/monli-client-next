@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { LanguageSwitcher } from './language-switcher'
+
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useLogin } from '@/hooks/use-mutation'
@@ -73,20 +73,18 @@ export function LoginForm({
                   </svg>
                   {t('loginWithGoogle')}
                 </Button>
-                <LanguageSwitcher />
               </div>
               <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                 <span className="bg-card text-muted-foreground relative z-10 px-2">
                   {t('orContinueWith')}
                 </span>
               </div>
-              <div className="grid gap-6">
+              <div className="grid gap-4">
                 <div className="grid gap-3">
                   <Label htmlFor="email">{t('email')}</Label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder={t('emailPlaceholder')}
                     value={formData.email}
                     onChange={handleInputChange}
                     required
