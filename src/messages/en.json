@@ -86,8 +86,10 @@
     "profile": "Profile",
     "settings": "Settings",
     "logout": "Logout",
-    "logoutConfirm": "Are you sure you want to logout?",
-    "loggingOut": "Logging out..."
+    "logoutConfirm": "Confirm logout",
+    "logoutDescription": "Are you sure you want to logout? You will be redirected to the login page.",
+    "loggingOut": "Logging out...",
+    "cancel": "Cancel"
   },
   "common": {
     "loading": "Loading...",

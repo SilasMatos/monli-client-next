@@ -28,8 +28,10 @@
     "profile": "Perfil",
     "settings": "Configurações",
     "logout": "Sair",
-    "logoutConfirm": "Tem certeza que deseja sair?",
-    "loggingOut": "Saindo..."
+    "logoutConfirm": "Confirmar logout",
+    "logoutDescription": "Tem certeza que deseja sair da sua conta? Você será redirecionado para a página de login.",
+    "loggingOut": "Saindo...",
+    "cancel": "Cancelar"
   },
   "auth": {
     "welcomeBack": "Bem-vindo de volta",

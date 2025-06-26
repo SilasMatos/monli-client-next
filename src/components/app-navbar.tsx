@@ -108,9 +108,7 @@ function UserMenu() {
   })
 
   const handleLogout = () => {
-    if (confirm(t('logoutConfirm'))) {
-      logoutMutation.mutate()
-    }
+    logoutMutation.mutate()
   }
 
   return (
@@ -145,8 +143,9 @@ function UserMenu() {
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <DropdownMenuItem
+              onSelect={e => e.preventDefault()}
               disabled={logoutMutation.isPending}
-              className="text-red-600 focus:text-red-600"
+              className="text-white focus:text-red-100"
             >
               <LogOut className="mr-2 h-4 w-4" />
               <span>
@@ -157,22 +156,27 @@ function UserMenu() {
           <AlertDialogContent>
             <div className="flex flex-col gap-2 max-sm:items-center sm:flex-row sm:gap-4">
               <div
-                className="flex size-9 shrink-0 items-center justify-center rounded-full border"
+                className="flex size-8 shrink-0 items-center justify-center rounded-full border dark:border-gray-800 dark:bg-black bg-gray-300"
                 aria-hidden="true"
               >
-                <CircleAlert className="opacity-80" size={16} />
+                <CircleAlert className="text-gray-400 " size={18} />
               </div>
               <AlertDialogHeader>
-                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                <AlertDialogTitle>{t('logoutConfirm')}</AlertDialogTitle>
                 <AlertDialogDescription>
-                  Are you sure you want to delete your account? All your data
-                  will be removed.
+                  {t('logoutDescription')}
                 </AlertDialogDescription>
               </AlertDialogHeader>
             </div>
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction>Confirm</AlertDialogAction>
+              <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={handleLogout}
+                disabled={logoutMutation.isPending}
+                className="bg-red-600 hover:bg-red-700 text-white"
+              >
+                {logoutMutation.isPending ? t('loggingOut') : t('logout')}
+              </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
