@@ -1,4 +1,4 @@
-// filepath: src/services/mutations.ts
+
 import axiosInstance from "@/lib/axios-instance";
 import { RegisterMutation, LoginMutation, createAccount } from "@/types/mutations-types";
 
@@ -20,8 +20,6 @@ export async function Logout() {
 
 export async function CreateAccount(payload: createAccount) {
   const formData = new FormData();
-
-  // Converter initialBalance para number
   const processedPayload = {
     ...payload,
     initialBalance: Number(payload.initialBalance)

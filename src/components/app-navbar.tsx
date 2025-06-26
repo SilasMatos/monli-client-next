@@ -49,6 +49,18 @@ import {
   Receipt,
   LogOut
 } from 'lucide-react'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
+} from '@/components/ui/alert-dialog'
+import { CircleAlert } from 'lucide-react'
 
 const navigationLinks = [
   { href: '/', label: 'Dashboard', icon: Home },
@@ -76,22 +88,18 @@ function UserMenu() {
 
   const logoutMutation = useLogout({
     onSuccess: () => {
-      // Limpar dados do localStorage/sessionStorage
       localStorage.removeItem('token')
       localStorage.removeItem('user')
       sessionStorage.clear()
 
-      // Mostrar toast de sucesso
       toast.success('Logout realizado com sucesso!')
 
-      // Redirecionar para a página de login
       router.push('/login')
     },
     onError: (error: any) => {
       console.error('Erro no logout:', error)
       toast.error('Erro ao fazer logout. Redirecionando mesmo assim...')
 
-      // Mesmo com erro, limpar dados locais e redirecionar
       localStorage.removeItem('token')
       localStorage.removeItem('user')
       sessionStorage.clear()
@@ -134,16 +142,40 @@ function UserMenu() {
           <span>{t('settings')}</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onClick={handleLogout}
-          disabled={logoutMutation.isPending}
-          className="text-red-600 focus:text-red-600"
-        >
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>
-            {logoutMutation.isPending ? t('loggingOut') : t('logout')}
-          </span>
-        </DropdownMenuItem>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <DropdownMenuItem
+              disabled={logoutMutation.isPending}
+              className="text-red-600 focus:text-red-600"
+            >
+              <LogOut className="mr-2 h-4 w-4" />
+              <span>
+                {logoutMutation.isPending ? t('loggingOut') : t('logout')}
+              </span>
+            </DropdownMenuItem>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <div className="flex flex-col gap-2 max-sm:items-center sm:flex-row sm:gap-4">
+              <div
+                className="flex size-9 shrink-0 items-center justify-center rounded-full border"
+                aria-hidden="true"
+              >
+                <CircleAlert className="opacity-80" size={16} />
+              </div>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Are you sure you want to delete your account? All your data
+                  will be removed.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+            </div>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction>Confirm</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </DropdownMenuContent>
     </DropdownMenu>
   )

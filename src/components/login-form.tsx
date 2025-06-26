@@ -18,7 +18,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { useTranslations } from 'next-intl'
-
+import { useAuthStore } from '@/stores/user-store'
 export function LoginForm({
   className,
   ...props
@@ -29,10 +29,12 @@ export function LoginForm({
     email: '',
     password: ''
   })
-
+  const { setIsFirstAccess } = useAuthStore()
   const loginMutation = useLogin({
     onSuccess: data => {
       toast.success('Login realizado com sucesso!')
+
+      setIsFirstAccess(data?.user?.isFirstAccess)
       router.push('/')
     },
     onError: (error: any) => {

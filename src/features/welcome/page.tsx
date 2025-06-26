@@ -150,7 +150,6 @@ export default function WelcomeScreen() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-background">
       <div className="w-full max-w-2xl">
-        {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-foreground mb-2">
             Bem-vindo! 👋
@@ -159,11 +158,7 @@ export default function WelcomeScreen() {
             Vamos configurar sua conta em alguns passos simples
           </p>
         </div>
-
-        {/* Stepper */}
-        <WelcomeStepper currentStep={currentStep} steps={steps} />
-
-        {/* Form */}
+        <WelcomeStepper currentStep={currentStep} steps={steps} />\
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <Card>
@@ -181,7 +176,6 @@ export default function WelcomeScreen() {
               <CardContent>{renderStepContent()}</CardContent>
             </Card>
 
-            {/* Navigation */}
             <div className="flex justify-between items-center">
               <Button
                 type="button"
@@ -229,8 +223,6 @@ export default function WelcomeScreen() {
             </div>
           </form>
         </Form>
-
-        {/* Debug info - remover em produção */}
         {process.env.NODE_ENV === 'development' && (
           <div className="mt-8 p-4 bg-muted rounded-lg">
             <h3 className="font-semibold mb-2">Debug Info:</h3>
